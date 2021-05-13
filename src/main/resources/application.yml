@@ -3,7 +3,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     #todo: change database name
-    url: jdbc:postgresql://127.0.0.1:5432/horses
+    url: jdbc:postgresql://127.0.0.1:5432/bookings
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
