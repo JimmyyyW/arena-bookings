@@ -15,4 +15,8 @@ class HorseService(private val horseRepository: HorseRepository) {
     fun getAllHorses(): MutableIterable<Horse> {
         return horseRepository.findAll()
     }
+
+    fun findHorseById(horseId: Int): Horse {
+        return horseRepository.findById(horseId).orElseThrow { Exception("") }
+    }
 }

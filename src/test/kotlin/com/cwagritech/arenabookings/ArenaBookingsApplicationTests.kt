@@ -15,7 +15,6 @@ class ArenaBookingsApplicationTests {
 
     @Test
     fun contextLoads() {
-        fail{ "oh no!" }
     }
 
 }
