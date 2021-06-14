@@ -2,6 +2,7 @@ package com.cwagritech.arenabookings
 
 import com.cwagritech.arenabookings.persistence.HorseRepository
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDateTime
@@ -14,7 +15,7 @@ class ArenaBookingsApplicationTests {
 
     @Test
     fun contextLoads() {
-
+        fail{ "oh no!" }
     }
 
 }
