@@ -17,11 +17,13 @@ class BookingController(
 
     @PostMapping("/bookings")
     fun createBooking(@RequestBody booking: HttpBookingRequest): Booking {
+        // check dates
         return bookingService.createBooking(booking)
     }
 
     @GetMapping("/bookings")
     fun getBookings(): MutableIterable<Booking> {
+        // add filters
         return bookingService.findAllBookings()
     }
 }
