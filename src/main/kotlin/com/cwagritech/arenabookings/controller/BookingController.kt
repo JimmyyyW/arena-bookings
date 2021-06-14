@@ -1,8 +1,6 @@
 package com.cwagritech.arenabookings.controller
 
 import com.cwagritech.arenabookings.model.Booking
-import com.cwagritech.arenabookings.persistence.BookingRepository
-import com.cwagritech.arenabookings.persistence.HorseRepository
 import com.cwagritech.arenabookings.service.BookingService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
