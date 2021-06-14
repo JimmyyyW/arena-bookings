@@ -3,6 +3,7 @@ package com.cwagritech.arenabookings.controller
 import com.cwagritech.arenabookings.model.Booking
 import com.cwagritech.arenabookings.persistence.BookingRepository
 import com.cwagritech.arenabookings.persistence.HorseRepository
+import com.cwagritech.arenabookings.service.BookingService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -11,30 +12,17 @@ import java.time.LocalDateTime
 
 @RestController
 class BookingController(
-    val bookingRepository: BookingRepository,
-    val horseRepository: HorseRepository
+    val bookingService: BookingService
 ) {
 
     @PostMapping("/bookings")
     fun createBooking(@RequestBody booking: HttpBookingRequest): Booking {
-        val horse = horseRepository.findById(booking.horseId)
-        if (horse.isEmpty) {
-            throw Exception("couldnt find horse by id ${booking.horseId}")
-        }
-        val realBooking = Booking(
-            null,
-            horse = horse.get(),
-            startTime = booking.startTime,
-            endTime = booking.endTime,
-            sharing = booking.sharing,
-            jumps = booking.jumps
-        )
-        return bookingRepository.save(realBooking)
+        return bookingService.createBooking(booking)
     }
 
     @GetMapping("/bookings")
     fun getBookings(): MutableIterable<Booking> {
-        return bookingRepository.findAll()
+        return bookingService.findAllBookings()
     }
 }
 
