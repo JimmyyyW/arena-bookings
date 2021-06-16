@@ -14,7 +14,7 @@ import javax.persistence.Id
 @Entity(name = "users")
 class User : UserDetails, Serializable {
     @Id
-    val id = 0
+    val id: Int? = null
 
     @CreatedDate
     private val createdAt: LocalDateTime? = null

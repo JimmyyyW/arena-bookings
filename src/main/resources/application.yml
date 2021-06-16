@@ -2,10 +2,11 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/horses
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+#  datasource:
+#    url: jdbc:postgresql://127.0.0.1:5432/horses
+#    username: postgres
+#    password: postgres
+#    driver-class-name:
+use-heroku-sql: true
 server:
   port: 8099
