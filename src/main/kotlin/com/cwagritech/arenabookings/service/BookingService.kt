@@ -28,9 +28,7 @@ class BookingService(
 
             val currentBookings = bookingRepository.findAllByStartTimeIsBetween(booking.startTime, booking.endTime)
             if (currentBookings.isEmpty()) return true
-
         }
-
         return false
     }
 
