@@ -53,6 +53,7 @@ class SecurityConfig(
             .and()
             .authorizeRequests()
             // Our public endpoints
+            .antMatchers(HttpMethod.GET, "/").permitAll()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/bookings").permitAll()
             .antMatchers(HttpMethod.POST, "/api/author/search").permitAll()
