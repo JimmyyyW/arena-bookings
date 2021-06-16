@@ -12,16 +12,12 @@ import java.time.LocalDateTime
 class ArenaBookingsApplicationTests {
 
     @Autowired
-    lateinit var horseRepository: HorseRepository
-
-    @Autowired
     lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
     @Test
     fun contextLoads() {
         println(bCryptPasswordEncoder.encode("admin"))
     }
-
 }
 
 class demo {

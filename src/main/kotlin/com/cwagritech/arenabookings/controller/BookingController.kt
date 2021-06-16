@@ -5,16 +5,12 @@ import com.cwagritech.arenabookings.common.ErrorMessage
 import com.cwagritech.arenabookings.model.Booking
 import com.cwagritech.arenabookings.service.BookingService
 import com.cwagritech.arenabookings.service.HorseService
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.util.MultiValueMap
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.awt.print.Book
-import java.net.http.HttpResponse
 import java.time.LocalDateTime
 
 @RestController

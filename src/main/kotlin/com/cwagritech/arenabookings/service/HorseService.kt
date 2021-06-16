@@ -15,8 +15,8 @@ class HorseService(
 
     fun createHorse(createHorseRequest: CreateHorseRequest): Either<Horse, Throwable> {
         val customer = customerRepository.findById(createHorseRequest.customerId)
-        return if (customer.isEmpty) {
-            Either.Right( Exception("Could not find customer"))
+        return if (customer.isEmpty()) {
+            Either.Right(Exception("Could not find customer"))
         } else Either.Left(horseRepository.save(Horse(null, customer.get(),  createHorseRequest.name)))
     }
 
