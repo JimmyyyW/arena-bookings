@@ -6,6 +6,9 @@ spring:
     url: jdbc:postgresql://127.0.0.1:5432/horses
     username: postgres
     password: postgres
+#    url: jdbc:postgresql://ec2-52-19-170-215.eu-west-1.compute.amazonaws.com/d8issv95s1tri1
+#    username: utgyxkflpucjgc
+#    password:
     driver-class-name:
 use-heroku-sql: false
 server:
