@@ -27,7 +27,6 @@ import java.util.*
 
 
 @Component
-@Order(10)
 class JwtTokenFilter(
     private val jwtTokenUtil: JwtTokenUtil,
     private val userRepo: UserRepository
@@ -54,8 +53,7 @@ class JwtTokenFilter(
         }
 
         // Get user identity and set it on the spring security context
-        val userDetails: UserDetails = userRepo
-            .findByUsername(jwtTokenUtil.getUsername(token))
+        val userDetails: UserDetails? = userRepo.findByUsername(jwtTokenUtil.getUsername(token))
         val authentication = UsernamePasswordAuthenticationToken(
             userDetails, null,
             Optional.ofNullable(userDetails).map { obj: UserDetails -> obj.authorities }.orElse(emptyList())

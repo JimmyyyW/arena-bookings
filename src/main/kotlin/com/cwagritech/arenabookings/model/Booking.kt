@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity(name = "bookings")
 data class Booking(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val bookingId: Int? = null,
     @ManyToOne
     val horse: Horse,
@@ -19,7 +19,7 @@ data class Booking(
 @Entity(name = "horses")
 data class Horse(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val horseId: Int? = null,
     @ManyToOne
     val customer: Customer,

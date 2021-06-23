@@ -1,53 +1,71 @@
-//package com.cwagritech.arenabookings.model
-//
-//import org.springframework.data.annotation.CreatedDate
-//import org.springframework.data.annotation.LastModifiedDate
-//import org.springframework.security.core.GrantedAuthority
-//import org.springframework.security.core.userdetails.UserDetails
-//import org.springframework.stereotype.Indexed
-//import java.time.LocalDateTime
-//import javax.persistence.*
-//
-//@Entity(name = "users")
-//class User(
-//    private val username: String,
-//    private val password: String): UserDetails {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    val id: Int? = null
-//
-//    @CreatedDate
-//    val createdAt: LocalDateTime? = null
-//
-//    @LastModifiedDate
-//    val lastModifiedDate: LocalDateTime? = null
-//
-//    override fun getPassword(): String {
-//        return password
-//    }
-//
-//    override fun getUsername(): String {
-//        return username
-//    }
-//
-//    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-//        return this.authorities
-//    }
-//
-//    override fun isAccountNonExpired(): Boolean {
-//        return isAccountNonExpired
-//    }
-//
-//    override fun isAccountNonLocked(): Boolean {
-//        return this.isAccountNonLocked
-//    }
-//
-//    override fun isCredentialsNonExpired(): Boolean {
-//        return isCredentialsNonExpired
-//    }
-//
-//    override fun isEnabled(): Boolean {
-//        return isEnabled
-//    }
-//}
+package com.cwagritech.arenabookings.model
+
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import java.io.Serializable
+import java.time.LocalDateTime
+import javax.persistence.*
+
+@Entity
+@Table(name = "users")
+class User : UserDetails, Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val id: Int? = null
+
+    @CreatedDate
+    private val createdAt: LocalDateTime? = null
+
+    @LastModifiedDate
+    private var lastModifiedDate: LocalDateTime? = null
+    private var enabled = true
+    private var username: String? = null
+    private var password: String? = null
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    var roles: MutableList<UserRole>? = null
+
+    constructor() {}
+    constructor(username: String?, password: String?) {
+        this.username = username
+        this.password = password
+        enabled = true
+    }
+
+    override fun getAuthorities(): Collection<GrantedAuthority?> {
+        val grantedAuthorities = mutableListOf<GrantedAuthority?>()
+        if (roles != null) {
+            for (role in roles!!) {
+                grantedAuthorities.add(SimpleGrantedAuthority(role.roleName?.name))
+            }
+        }
+        return grantedAuthorities
+    }
+
+    override fun getPassword(): String {
+        return password!!
+    }
+
+    override fun getUsername(): String {
+        return username!!
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return enabled
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return enabled
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return enabled
+    }
+
+    override fun isEnabled(): Boolean {
+        return enabled
+    }
+}

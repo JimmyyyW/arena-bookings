@@ -5,7 +5,7 @@ import javax.persistence.*
 @Entity(name = "customers")
 data class Customer(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val customerId: Int? = null,
     val firstName: String? = null,
     val lastName: String? = null,

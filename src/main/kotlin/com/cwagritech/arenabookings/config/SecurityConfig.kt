@@ -4,6 +4,8 @@ import com.cwagritech.arenabookings.persistence.UserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -16,6 +18,7 @@ import java.lang.Exception
 import javax.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
 
 
 @EnableWebSecurity
@@ -24,7 +27,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
     jsr250Enabled = true,
     prePostEnabled = true
 )
-@Order(1)
 class SecurityConfig(
     private val userRepo: UserRepository,
     private val jwtTokenFilter: JwtTokenFilter
@@ -56,16 +58,16 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/").permitAll()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/bookings").permitAll()
-            .antMatchers(HttpMethod.POST, "/api/author/search").permitAll()
-            .antMatchers(HttpMethod.GET, "/horses").permitAll()
-            .antMatchers(HttpMethod.POST, "/api/book/search").permitAll()
+            .antMatchers(HttpMethod.POST, "/bookings").permitAll()
+            .antMatchers(HttpMethod.GET, "/customers").permitAll()
+            .antMatchers(HttpMethod.POST, "/customers").permitAll()
+            .antMatchers(HttpMethod.GET, "/horses").authenticated()
+            .antMatchers(HttpMethod.POST, "/horses").authenticated()
             .antMatchers("/web/**").permitAll()
             // Our private endpoints
             .anyRequest().authenticated()
             .and()
             .addFilterAfter(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
-
-
     }
 
     @Bean
@@ -78,4 +80,5 @@ class SecurityConfig(
     override fun authenticationManagerBean(): AuthenticationManager? {
         return super.authenticationManagerBean()
     }
+
 }
