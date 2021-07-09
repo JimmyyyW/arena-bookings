@@ -21,7 +21,7 @@ class HorseController(val horseService: HorseService) {
     )
     fun createHorse(@RequestBody horse: CreateHorseRequest): ResponseEntity<Any> {
         return when (val horseOrError = horseService.createHorse(horse)) {
-            is Either.Left -> ResponseEntity<Any>(horseOrError, HttpStatus.CREATED)
+            is Either.Left -> ResponseEntity<Any>(horseOrError.value, HttpStatus.CREATED)
             is Either.Right -> ResponseEntity<Any>(ErrorMessage(horseOrError.value.message), HttpStatus.NOT_FOUND)
         }
     }

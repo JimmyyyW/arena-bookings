@@ -1,5 +1,7 @@
 package com.cwagritech.arenabookings.model
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo
+import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.security.core.GrantedAuthority
@@ -11,6 +13,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
+//@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator::class, property="id")
 class User : UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

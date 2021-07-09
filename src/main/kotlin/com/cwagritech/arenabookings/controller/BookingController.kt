@@ -7,12 +7,9 @@ import com.cwagritech.arenabookings.service.BookingService
 import com.cwagritech.arenabookings.service.HorseService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
-import javax.annotation.security.RolesAllowed
+import org.springframework.web.bind.annotation.*
+import java.time.OffsetDateTime
+import java.time.ZonedDateTime
 
 @RestController
 class BookingController(
@@ -33,7 +30,7 @@ class BookingController(
         )
 
         return when(val bookingOrError = bookingService.createBooking(booking)) {
-            is Either.Left -> ResponseEntity<Any>(bookingOrError, HttpStatus.CREATED)
+            is Either.Left -> ResponseEntity<Any>(bookingOrError.value, HttpStatus.CREATED)
             is Either.Right -> ResponseEntity<Any>(ErrorMessage(bookingOrError.value.message), HttpStatus.NOT_ACCEPTABLE)
         }
     }
@@ -43,12 +40,17 @@ class BookingController(
         // add filters
         return bookingService.findAllBookings()
     }
+
+    @DeleteMapping("/bookings/{bookingId}")
+    fun deleteBooking(@PathVariable bookingId: Int) {
+        bookingService.deleteBooking(bookingId)
+    }
 }
 
 data class HttpBookingRequest(
     val horseId: Int,
-    val startTime: LocalDateTime,
-    val endTime: LocalDateTime,
+    val startTime: OffsetDateTime,
+    val endTime: OffsetDateTime,
     val jumps: Boolean,
     val sharing: Boolean
 )

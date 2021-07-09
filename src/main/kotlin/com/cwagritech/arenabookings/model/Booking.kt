@@ -1,6 +1,6 @@
 package com.cwagritech.arenabookings.model
 
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import javax.persistence.*
 
 @Entity(name = "bookings")
@@ -10,8 +10,8 @@ data class Booking(
     val bookingId: Int? = null,
     @ManyToOne
     val horse: Horse,
-    val startTime: LocalDateTime,
-    val endTime: LocalDateTime,
+    val startTime: OffsetDateTime,
+    val endTime: OffsetDateTime,
     val jumps: Boolean,
     val sharing: Boolean
 )

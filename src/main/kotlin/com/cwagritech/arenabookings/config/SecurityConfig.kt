@@ -61,8 +61,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/bookings").permitAll()
             .antMatchers(HttpMethod.GET, "/customers").permitAll()
             .antMatchers(HttpMethod.POST, "/customers").permitAll()
-            .antMatchers(HttpMethod.GET, "/horses").authenticated()
-            .antMatchers(HttpMethod.POST, "/horses").authenticated()
+            .antMatchers(HttpMethod.GET, "/horses").permitAll()
+            .antMatchers(HttpMethod.POST, "/horses").permitAll()
             .antMatchers("/web/**").permitAll()
             // Our private endpoints
             .anyRequest().authenticated()

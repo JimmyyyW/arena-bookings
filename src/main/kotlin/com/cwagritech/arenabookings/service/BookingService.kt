@@ -32,4 +32,8 @@ class BookingService(
         return false
     }
 
+    fun deleteBooking(bookingId: Int) {
+        bookingRepository.deleteById(bookingId)
+    }
+
 }

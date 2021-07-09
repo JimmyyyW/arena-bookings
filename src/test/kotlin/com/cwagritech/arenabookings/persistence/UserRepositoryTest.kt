@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.time.Instant
 
 @SpringBootTest
 internal class UserRepositoryTest {
@@ -20,22 +21,28 @@ internal class UserRepositoryTest {
     @Autowired
     lateinit var bCryptPasswordEncoder: BCryptPasswordEncoder
 
+//    @Test
+//    fun createAndSaveUser() {
+//        val user = User(
+//            username = "testUser",
+//            password = bCryptPasswordEncoder.encode("admin")
+//        )
+//
+//        user.roles = mutableListOf(
+//            roleRepository.findByRoleName(Role.ROLE_USER)
+//        )
+//        val savedUser = userRepository.save(user)
+//
+//        assertEquals("testUser", savedUser.username)
+//        assertEquals("ROLE_USER", user.roles!![0].roleName?.name)
+//
+//        //userRepository.deleteById(savedUser.id!!)
+//    }
+
     @Test
-    fun createAndSaveUser() {
-        val user = User(
-            username = "testUser",
-            password = bCryptPasswordEncoder.encode("admin")
-        )
-
-        user.roles = mutableListOf(
-            roleRepository.findByRoleName(Role.ROLE_USER)
-        )
-        val savedUser = userRepository.save(user)
-
-        assertEquals("testUser", savedUser.username)
-        assertEquals("USER", user.roles!![0].roleName?.name)
-
-        //userRepository.deleteById(savedUser.id!!)
+    fun pass() {
+        println(Instant.now())
+        println(bCryptPasswordEncoder.encode("admin"))
     }
 
 }
