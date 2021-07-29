@@ -1,5 +1,6 @@
 package com.cwagritech.arenabookings.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.OffsetDateTime
 import javax.persistence.*
 
@@ -17,6 +18,7 @@ data class Booking(
 )
 
 @Entity(name = "horses")
+@JsonIgnoreProperties("customer")
 data class Horse(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -33,6 +33,7 @@ class HorseController(val horseService: HorseService) {
     fun getHorses(): MutableIterable<Horse> {
         return horseService.getAllHorses()
     }
+
 }
 
 data class CreateHorseRequest(

@@ -18,6 +18,11 @@ class CustomerService(val customerRepository: CustomerRepository) {
                 lastName = customer.lastName,
                 email = customer.email,
                 phoneNumber = customer.phoneNumber,
+                addressOne = customer.addressOne,
+                addressTwo = customer.addressTwo,
+                city = customer.city,
+                county = customer.county,
+                postCode = customer.postCode,
                 horses = emptyList()
             )
         )

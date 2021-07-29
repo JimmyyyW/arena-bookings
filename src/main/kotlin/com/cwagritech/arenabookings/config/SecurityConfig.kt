@@ -2,11 +2,10 @@ package com.cwagritech.arenabookings.config
 
 import com.cwagritech.arenabookings.persistence.UserRepository
 import org.springframework.context.annotation.Bean
-import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -14,11 +13,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import java.lang.Exception
 import javax.servlet.http.HttpServletResponse
-import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler
 
 
 @EnableWebSecurity
@@ -59,6 +54,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/bookings").permitAll()
             .antMatchers(HttpMethod.POST, "/bookings").permitAll()
+            .antMatchers(HttpMethod.DELETE, "/bookings/{bookingId}").permitAll()
             .antMatchers(HttpMethod.GET, "/customers").permitAll()
             .antMatchers(HttpMethod.POST, "/customers").permitAll()
             .antMatchers(HttpMethod.GET, "/horses").permitAll()
