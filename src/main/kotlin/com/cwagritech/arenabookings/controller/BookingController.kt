@@ -37,7 +37,7 @@ class BookingController(
     }
 
     @GetMapping("/bookings")
-    fun getBookings(serverRequest: ServerRequest): MutableIterable<Booking> {
+    fun getBookings(): MutableIterable<Booking> {
         // add filters
         return bookingService.findAllBookings()
     }
