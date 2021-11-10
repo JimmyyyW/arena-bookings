@@ -1,8 +1,10 @@
 package com.cwagritech.arenabookings.service
 
 import com.cwagritech.arenabookings.controller.HttpCreateCustomerRequest
+import com.cwagritech.arenabookings.controller.HttpUpdateCustomerRequest
 import com.cwagritech.arenabookings.model.Customer
 import com.cwagritech.arenabookings.persistence.CustomerRepository
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -26,5 +28,26 @@ class CustomerService(val customerRepository: CustomerRepository) {
                 horses = emptyList()
             )
         )
+    }
+
+    fun updateCustomer(customerId: Int, customerRequest: HttpUpdateCustomerRequest): Customer {
+        val existingCustomer = customerRepository.findById(customerId)
+        if (existingCustomer.isPresent) {
+            val customer = Customer(
+                customerId = customerId,
+                firstName = customerRequest.firstName,
+                lastName = customerRequest.lastName,
+                email = customerRequest.email,
+                phoneNumber = customerRequest.phoneNumber,
+                addressOne = customerRequest.addressOne,
+                addressTwo = customerRequest.addressTwo,
+                city = customerRequest.city,
+                county = customerRequest.county,
+                postCode = customerRequest.postCode,
+                horses = existingCustomer.get().horses
+            )
+            return customerRepository.save(customer)
+        }
+        else throw Exception("failed to find existing customer")
     }
 }

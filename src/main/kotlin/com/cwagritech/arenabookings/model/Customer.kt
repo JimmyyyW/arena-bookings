@@ -1,8 +1,12 @@
 package com.cwagritech.arenabookings.model
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import org.hibernate.annotations.Fetch
+import org.hibernate.annotations.FetchMode
 import javax.persistence.*
 
 @Entity(name = "customers")
+@JsonIgnoreProperties("customers")
 data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +21,9 @@ data class Customer(
     val county: String? = null,
     val postCode: String? = null,
     @OneToMany(targetEntity = Horse::class, fetch = FetchType.EAGER, mappedBy = "customer")
-    val horses: List<Horse>? = null
+    val horses: List<Horse>? = null,
+    @OneToMany(targetEntity = User::class, fetch = FetchType.LAZY, mappedBy = "customerId")
+    @Fetch(value = FetchMode.SUBSELECT)
+    val users: List<User>? = null
 
 )

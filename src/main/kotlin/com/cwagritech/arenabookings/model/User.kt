@@ -23,19 +23,29 @@ class User : UserDetails, Serializable {
     private val createdAt: LocalDateTime? = null
 
     @LastModifiedDate
-    private var lastModifiedDate: LocalDateTime? = null
-    private var enabled = true
+    private var lastModifiedDate: LocalDateTime? = LocalDateTime.now()
+
+    private var enabled: Boolean = true
     private var username: String? = null
     private var password: String? = null
 
     @ManyToMany(fetch = FetchType.EAGER)
-    var roles: MutableList<UserRole>? = null
+    var roles: MutableList<UserRole>? = mutableListOf()
+
+    var customerId: Int? = null
 
     constructor() {}
     constructor(username: String?, password: String?) {
         this.username = username
         this.password = password
         enabled = true
+    }
+
+    constructor(username: String?, password: String?, enabled: Boolean, customerId: Int) {
+        this.username = username
+        this.password = password
+        this.enabled = enabled
+        this.customerId = customerId
     }
 
     override fun getAuthorities(): Collection<GrantedAuthority?> {
@@ -71,4 +81,5 @@ class User : UserDetails, Serializable {
     override fun isEnabled(): Boolean {
         return enabled
     }
+
 }

@@ -27,4 +27,8 @@ class HorseService(
     fun findHorseById(horseId: Int): Horse {
         return horseRepository.findById(horseId).orElseThrow { Exception("") }
     }
+
+    fun deleteHorse(horseId: Int) {
+        return horseRepository.deleteById(horseId)
+    }
 }

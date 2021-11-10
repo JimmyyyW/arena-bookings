@@ -29,6 +29,12 @@ class UserRole(
         const val USER = "ROLE_USER"
         const val ADMIN = "ROLE_ADMIN"
     }
+
+    override fun toString(): String {
+        return "UserRole(id=$id, roleName=$roleName, users=$users)"
+    }
+
+
 }
 
 enum class Role {
