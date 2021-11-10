@@ -8,7 +8,7 @@ spring:
 #    password: postgres
     url: jdbc:postgresql://ec2-3-248-103-75.eu-west-1.compute.amazonaws.com:5432/ddve3k4uji7tfc
     username: dfdkikjrprewxt
-    password: 5052272ef163f1a59f29ec8ecc98d61859061f52ed693959e11ddd313f560cad
+    password:
     driver-class-name: org.postgresql.Driver
 #use-heroku-sql: false
 server:
