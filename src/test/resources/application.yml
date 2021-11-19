@@ -9,4 +9,4 @@ spring:
     driver-class-name:
 use-heroku-sql: false
 server:
-  port: 8099
+  port: 8080

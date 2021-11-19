@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface HorseRepository : CrudRepository<Horse, Int>{
+
+    fun findAllByCustomerCustomerId(customerId: Int): MutableList<Horse>
 }

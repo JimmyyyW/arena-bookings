@@ -2,12 +2,14 @@ package com.cwagritech.arenabookings.controller
 
 import com.cwagritech.arenabookings.model.Role
 import com.cwagritech.arenabookings.model.User
+import com.cwagritech.arenabookings.model.UserRole
 import com.cwagritech.arenabookings.persistence.RoleRepository
 import com.cwagritech.arenabookings.persistence.UserRepository
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.*
+import javax.annotation.security.RolesAllowed
 
 @RestController
 class UserController(private val userRepository: UserRepository,
@@ -15,6 +17,7 @@ class UserController(private val userRepository: UserRepository,
                      private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
 
+    @RolesAllowed(UserRole.ADMIN)
     @PostMapping("/users",
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
@@ -33,6 +36,7 @@ class UserController(private val userRepository: UserRepository,
         return userRepository.save(user)
     }
 
+    @RolesAllowed(UserRole.ADMIN)
     @DeleteMapping("/users/{userId}",
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])

@@ -37,9 +37,13 @@ class BookingController(
     }
 
     @GetMapping("/bookings")
-    fun getBookings(): MutableIterable<Booking> {
+    fun getBookings(): List<HttpBookingResponse> {
         // add filters
         return bookingService.findAllBookings()
+            .map { HttpBookingResponse(
+                it,
+                it.horse.customer.customerId
+            ) }
     }
 
     @DeleteMapping("/bookings/{bookingId}")
@@ -47,6 +51,11 @@ class BookingController(
         bookingService.deleteBooking(bookingId)
     }
 }
+
+data class HttpBookingResponse(
+    val booking: Booking,
+    val customerId: Int?
+)
 
 data class HttpBookingRequest(
     val horseId: Int,

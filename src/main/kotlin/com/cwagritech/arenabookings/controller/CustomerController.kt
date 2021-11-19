@@ -8,13 +8,14 @@ import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.lang.Nullable
 import org.springframework.web.bind.annotation.*
+import javax.annotation.security.RolesAllowed
 
 @RestController
 class CustomerController(val customerService: CustomerService) {
 
     @GetMapping("/customers", produces = [MediaType.APPLICATION_JSON_VALUE])
     //@PreAuthorize("hasAuthority('ADMIN')")
-    //@RolesAllowed(UserRole.ADMIN)
+    @RolesAllowed(UserRole.ADMIN)
     fun getCustomers(): MutableIterable<Customer> {
         return customerService.findAllCustomers().toSortedSet { customer1, customer2 ->
             customer1.firstName!![0].compareTo(customer2.firstName!![0])
@@ -30,6 +31,7 @@ class CustomerController(val customerService: CustomerService) {
             }
     }
 
+    @RolesAllowed(UserRole.ADMIN)
     @PostMapping("/customers",
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -37,6 +39,7 @@ class CustomerController(val customerService: CustomerService) {
         return customerService.createCustomer(customer)
     }
 
+    @RolesAllowed(UserRole.ADMIN)
     @PutMapping("/customers/{customerId}",
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE])
