@@ -20,7 +20,7 @@ class JwtTokenUtil {
                 //format("%s,%s", user.id, user.username))
             .setIssuer(jwtIssuer)
             .setIssuedAt(Date())
-            .setExpiration(Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
+            .setExpiration(Date((System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000) / 7  * 365)) // 1 week * 52 (1y)
             .signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact()
     }
