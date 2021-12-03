@@ -11,3 +11,11 @@ spring:
 #use-heroku-sql: false
 server:
   port: 8080
+
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-methods: GET, OPTIONS
+        allowed-headers: "*"
+        allowed-origins: "*"

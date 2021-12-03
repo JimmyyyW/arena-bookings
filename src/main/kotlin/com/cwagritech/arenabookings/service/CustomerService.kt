@@ -50,4 +50,8 @@ class CustomerService(val customerRepository: CustomerRepository) {
         }
         else throw Exception("failed to find existing customer")
     }
+
+    fun deleteCustomer(customerId: String) {
+        customerRepository.deleteById(customerId.toInt())
+    }
 }

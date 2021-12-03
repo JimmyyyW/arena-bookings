@@ -12,7 +12,7 @@ import java.util.*
 @Component
 class JwtTokenUtil {
     private val jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP"
-    private val jwtIssuer = "example.io"
+    private val jwtIssuer = "cwagritech.io"
     private val logger: Logger = LoggerFactory.getLogger(JwtTokenUtil::class.java)
     fun generateAccessToken(user: User): String {
         return Jwts.builder()

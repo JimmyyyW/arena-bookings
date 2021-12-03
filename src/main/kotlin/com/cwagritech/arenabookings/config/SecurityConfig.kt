@@ -49,7 +49,8 @@ class SecurityConfig(
             }
             .and()
             .authorizeRequests()
-            // Our public endpoints
+            .antMatchers(HttpMethod.GET, "/actuator/health").permitAll()
+             // public endpoints
             .antMatchers(HttpMethod.GET, "/").permitAll()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/bookings").permitAll()
@@ -57,10 +58,12 @@ class SecurityConfig(
             .antMatchers(HttpMethod.DELETE, "/bookings/{bookingId}").permitAll()
             .antMatchers(HttpMethod.GET, "/customers").permitAll()
             .antMatchers(HttpMethod.POST, "/customers").permitAll()
+            .antMatchers(HttpMethod.DELETE, "/customers/{customerId}").permitAll()
             .antMatchers(HttpMethod.GET, "/horses").permitAll()
             .antMatchers(HttpMethod.POST, "/horses").permitAll()
+            .antMatchers(HttpMethod.GET, "/users/me/roles").permitAll()
             .antMatchers("/web/**").permitAll()
-            // Our private endpoints
+             // private endpoints
             .anyRequest().authenticated()
             .and()
             .addFilterAfter(jwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)

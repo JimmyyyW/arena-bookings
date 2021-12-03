@@ -1,10 +1,12 @@
 package com.cwagritech.arenabookings.controller
 
+import com.cwagritech.arenabookings.config.JwtTokenUtil
 import com.cwagritech.arenabookings.model.Role
 import com.cwagritech.arenabookings.model.User
 import com.cwagritech.arenabookings.model.UserRole
 import com.cwagritech.arenabookings.persistence.RoleRepository
 import com.cwagritech.arenabookings.persistence.UserRepository
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -14,8 +16,17 @@ import javax.annotation.security.RolesAllowed
 @RestController
 class UserController(private val userRepository: UserRepository,
                      private val roleRepository: RoleRepository,
+                     private val jwtTokenUtil: JwtTokenUtil,
                      private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
+
+//
+//    @RolesAllowed(UserRole.ADMIN, UserRole.USER)
+//    @GetMapping("/users/me/roles")
+//    fun getMyRoles(@RequestHeader headers: HttpHeaders): MutableList<UserRole>? {
+//        return userRepository.findByUsername(jwtTokenUtil.getUsername(headers.getFirst("Authorization")))
+//            ?.roles
+//    }
 
     @RolesAllowed(UserRole.ADMIN)
     @PostMapping("/users",

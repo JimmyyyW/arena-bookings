@@ -57,6 +57,18 @@ class CustomerController(val customerService: CustomerService) {
         }
     }
 
+    @RolesAllowed(UserRole.ADMIN)
+    @DeleteMapping("/customers/{customerId}")
+    fun deleteCustomer(@PathVariable customerId: String): ResponseEntity<Any> {
+        return try {
+            customerService.deleteCustomer(customerId)
+            ResponseEntity.noContent().build()
+        } catch (e: Exception) {
+            ResponseEntity.badRequest().build()
+        }
+    }
+
+
 }
 
 data class HttpUpdateCustomerRequest(
