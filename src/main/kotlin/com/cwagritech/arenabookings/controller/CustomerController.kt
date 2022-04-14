@@ -16,11 +16,11 @@ class CustomerController(val customerService: CustomerService) {
     @GetMapping("/customers", produces = [MediaType.APPLICATION_JSON_VALUE])
     //@PreAuthorize("hasAuthority('ADMIN')")
     @RolesAllowed(UserRole.ADMIN)
-    fun getCustomers(): MutableIterable<Customer> {
-        return customerService.findAllCustomers().toSortedSet { customer1, customer2 ->
+    fun getCustomers(): List<Customer> {
+        val sortedByName = customerService.findAllCustomers().sortedWith { customer1, customer2 ->
             customer1.firstName!![0].compareTo(customer2.firstName!![0])
         }
-            .onEach {
+        sortedByName.onEach {
                 it.users?.forEach { user ->
                     val roleList = mutableListOf<UserRole>()
                     user.roles?.forEach { role ->
@@ -29,6 +29,7 @@ class CustomerController(val customerService: CustomerService) {
                     user.roles = roleList
                 }
             }
+        return sortedByName
     }
 
     @RolesAllowed(UserRole.ADMIN)

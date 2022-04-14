@@ -4,7 +4,6 @@ import com.cwagritech.arenabookings.controller.HttpCreateCustomerRequest
 import com.cwagritech.arenabookings.controller.HttpUpdateCustomerRequest
 import com.cwagritech.arenabookings.model.Customer
 import com.cwagritech.arenabookings.persistence.CustomerRepository
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service

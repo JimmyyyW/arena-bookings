@@ -26,4 +26,8 @@ data class Horse(
     @ManyToOne
     val customer: Customer,
     val name: String
-)
+) {
+    override fun toString(): String {
+        return "Horse(horseId=$horseId, customer=${customer.customerId} name='$name')"
+    }
+}

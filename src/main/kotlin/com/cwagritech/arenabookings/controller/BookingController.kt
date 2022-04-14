@@ -8,9 +8,7 @@ import com.cwagritech.arenabookings.service.HorseService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.servlet.function.ServerRequest
 import java.time.OffsetDateTime
-import java.time.ZonedDateTime
 
 @RestController
 class BookingController(
