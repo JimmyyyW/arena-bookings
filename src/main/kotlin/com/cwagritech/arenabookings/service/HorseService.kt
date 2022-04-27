@@ -3,6 +3,7 @@ package com.cwagritech.arenabookings.service
 import com.cwagritech.arenabookings.common.Either
 import com.cwagritech.arenabookings.controller.CreateHorseRequest
 import com.cwagritech.arenabookings.model.Horse
+import com.cwagritech.arenabookings.model.Role
 import com.cwagritech.arenabookings.persistence.CustomerRepository
 import com.cwagritech.arenabookings.persistence.HorseRepository
 import com.cwagritech.arenabookings.persistence.UserRepository
@@ -28,7 +29,10 @@ class HorseService(
 
     fun getAllHorsesByUserId(userId: String): MutableList<Horse>? {
         val user = userRepository.findById(userId.toInt())
-        return user.get().customerId?.let { horseRepository.findAllByCustomerCustomerId(it) }
+        return when (user.get().roles?.find { it.roleName == Role.ROLE_ADMIN } != null) {
+            true -> horseRepository.findAll().toMutableList()
+            false -> horseRepository.findAllByCustomerCustomerId(user.get().customerId!!)
+        }
     }
 
     fun findHorseById(horseId: Int): Horse {
