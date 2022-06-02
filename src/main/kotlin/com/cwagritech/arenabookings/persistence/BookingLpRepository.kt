@@ -7,6 +7,6 @@ import java.time.OffsetDateTime
 
 @Repository
 interface BookingLpRepository : CrudRepository<BookingLp, Int> {
-
+    //aa
     fun findAllByStartTimeIsBetween(startTime: OffsetDateTime, endTime: OffsetDateTime): List<BookingLp>
 }
