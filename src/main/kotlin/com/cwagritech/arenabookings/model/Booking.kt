@@ -17,6 +17,17 @@ data class Booking(
     val sharing: Boolean
 )
 
+@Entity(name = "bookings_lp")
+data class BookingLp(
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    val bookingLpId: Int? = null,
+    @ManyToOne
+    val horse: Horse,
+    val startTime: OffsetDateTime,
+    val endTime: OffsetDateTime,
+)
+
 @Entity(name = "horses")
 @JsonIgnoreProperties("customer")
 data class Horse(
